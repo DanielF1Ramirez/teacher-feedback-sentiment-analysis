@@ -16,6 +16,10 @@
   - `evaluation.py`: accuracy + macro precision/recall/F1.
   - `pipeline.py`: reusable end-to-end baseline run from CSV.
   - `__init__.py`: public API exports.
+- Step 3 integration completed:
+  - `scripts/run_baseline.py` added as runnable entrypoint.
+  - `data/sample/teacher_feedback_sample.csv` added as default sample input.
+  - `reports/metrics/baseline_metrics.json` generated via script execution.
 
 ## Stable Files and Modules
 - Packaging/config: `pyproject.toml`, `requirements.txt`, `.gitignore`.
@@ -26,20 +30,23 @@
   - `src/teacher_feedback_sentiment_analysis/evaluation.py`
   - `src/teacher_feedback_sentiment_analysis/pipeline.py`
   - `src/teacher_feedback_sentiment_analysis/types.py`
+- Entrypoint and sample artifact:
+  - `scripts/run_baseline.py`
+  - `data/sample/teacher_feedback_sample.csv`
+  - `reports/metrics/baseline_metrics.json`
 - Context docs: `AGENTS.md`, `docs/project_context.md`.
 
 ## Remaining Gaps
-- No CLI/entrypoint script yet in `scripts/` to run pipeline on repo data paths.
 - No lightweight test suite in `tests/`.
 - No CI workflow file in `.github/workflows/`.
 - Repository documentation still incomplete (`README.md`, `CONTRIBUTING.md`, folder READMEs mostly empty).
 - No inference-focused module/API contract beyond baseline pipeline helper.
 
 ## Deferred Decisions
-- Final dataset contract for scripts/tests (exact sample CSV path and column names if different from defaults).
+- Dataset contract for non-sample runs (production file paths and schema guarantees beyond `text`/`label` defaults).
 - Baseline extension strategy (keep stdlib-only vs. introduce `scikit-learn` for vectorized classical models).
-- Output contract for metrics artifacts (console only vs. `reports/metrics/*.json` standard format).
+- Metrics artifact policy (commit generated metrics vs. generate on demand in CI/local runs).
 - Tooling scope for CI (lint/test matrix and Python versions).
 
 ## Exact Next Recommended Step
-- Create one script `scripts/run_baseline.py` that calls `run_majority_baseline_from_csv` on a small CSV in `data/sample/`, prints metrics, and saves them to `reports/metrics/baseline_metrics.json`.
+- Add lightweight tests in `tests/` for preprocessing normalization, evaluation metrics correctness, and one pipeline smoke test using `data/sample/teacher_feedback_sample.csv`.
