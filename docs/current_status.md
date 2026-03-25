@@ -20,6 +20,11 @@
   - `scripts/run_baseline.py` added as runnable entrypoint.
   - `data/sample/teacher_feedback_sample.csv` added as default sample input.
   - `reports/metrics/baseline_metrics.json` generated via script execution.
+- Step 4 quality checks completed:
+  - `tests/test_core_pipeline.py` added with three fast checks:
+    - preprocessing normalization behavior,
+    - evaluation metric correctness,
+    - pipeline smoke run on sample CSV.
 
 ## Stable Files and Modules
 - Packaging/config: `pyproject.toml`, `requirements.txt`, `.gitignore`.
@@ -34,10 +39,11 @@
   - `scripts/run_baseline.py`
   - `data/sample/teacher_feedback_sample.csv`
   - `reports/metrics/baseline_metrics.json`
+- Lightweight tests:
+  - `tests/test_core_pipeline.py`
 - Context docs: `AGENTS.md`, `docs/project_context.md`.
 
 ## Remaining Gaps
-- No lightweight test suite in `tests/`.
 - No CI workflow file in `.github/workflows/`.
 - Repository documentation still incomplete (`README.md`, `CONTRIBUTING.md`, folder READMEs mostly empty).
 - No inference-focused module/API contract beyond baseline pipeline helper.
@@ -49,4 +55,4 @@
 - Tooling scope for CI (lint/test matrix and Python versions).
 
 ## Exact Next Recommended Step
-- Add lightweight tests in `tests/` for preprocessing normalization, evaluation metrics correctness, and one pipeline smoke test using `data/sample/teacher_feedback_sample.csv`.
+- Add a minimal CI workflow in `.github/workflows/` that runs the fast test command (`PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`) on push and pull request.
