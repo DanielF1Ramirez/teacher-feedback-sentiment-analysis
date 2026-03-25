@@ -12,6 +12,7 @@
   - `data/sample/teacher_feedback_sample.csv`
   - `reports/metrics/baseline_metrics.json`
 - Lightweight tests added in `tests/test_core_pipeline.py` (preprocess, metrics, pipeline smoke).
+- Minimal CI scaffold added at `.github/workflows/ci.yml` to run unit tests on push and pull request.
 
 ## Stable Files and Modules
 - Configuration: `pyproject.toml`, `requirements.txt`, `.gitignore`.
@@ -28,9 +29,9 @@
   - `data/sample/teacher_feedback_sample.csv`
   - `reports/metrics/baseline_metrics.json`
   - `tests/test_core_pipeline.py`
+  - `.github/workflows/ci.yml`
 
 ## Remaining Gaps
-- No CI workflow implemented in `.github/workflows/`.
 - Documentation is still incomplete (`README.md`, `CONTRIBUTING.md`, and folder READMEs are placeholders).
 - `environment.yml` is still empty.
 - No explicit inference API/module beyond the baseline pipeline helper.
@@ -39,7 +40,7 @@
 - Dataset contract for non-sample runs (canonical input path and strict schema rules).
 - Baseline evolution strategy (stdlib baseline only vs. introducing `scikit-learn` classical models).
 - Metrics artifact policy (tracked file vs. generated output only).
-- CI scope (Python versions, lint checks, and gating policy).
+- CI scope extension (additional Python versions, lint checks, and gating policy).
 
 ## Exact Next Recommended Step
-- Add one minimal GitHub Actions workflow at `.github/workflows/ci.yml` to run `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v` on push and pull request.
+- Write a concise professional `README.md` documenting problem statement, repository structure, quickstart commands, and current baseline results.
