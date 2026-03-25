@@ -1,58 +1,45 @@
 # Current Status
 
 ## Date
-2026-03-24
+2026-03-25
 
 ## Completed Work
-- Baseline project configuration established:
-  - `pyproject.toml` with package metadata and setuptools config (`src/` layout).
-  - `requirements.txt` aligned to editable install (`-e .`) as dependency entrypoint.
-  - `.gitignore` populated with Python/build/cache/environment ignores.
-- Minimal modular NLP baseline implemented under `src/teacher_feedback_sentiment_analysis/`:
-  - `types.py`: `FeedbackRecord` dataclass.
-  - `data_loading.py`: CSV load + required-column/value validation.
-  - `preprocessing.py`: deterministic text normalization and record preprocessing.
-  - `baseline.py`: majority-class baseline classifier.
-  - `evaluation.py`: accuracy + macro precision/recall/F1.
-  - `pipeline.py`: reusable end-to-end baseline run from CSV.
-  - `__init__.py`: public API exports.
-- Step 3 integration completed:
-  - `scripts/run_baseline.py` added as runnable entrypoint.
-  - `data/sample/teacher_feedback_sample.csv` added as default sample input.
-  - `reports/metrics/baseline_metrics.json` generated via script execution.
-- Step 4 quality checks completed:
-  - `tests/test_core_pipeline.py` added with three fast checks:
-    - preprocessing normalization behavior,
-    - evaluation metric correctness,
-    - pipeline smoke run on sample CSV.
+- Project baseline configured (`pyproject.toml`, `requirements.txt`, `.gitignore`) with `src/` package layout.
+- Core reusable baseline NLP flow implemented in `src/teacher_feedback_sentiment_analysis/`:
+  - CSV loading/validation, preprocessing, majority-class model, metrics, end-to-end pipeline helper.
+- Runnable script added: `scripts/run_baseline.py`.
+- Sample data and artifact added:
+  - `data/sample/teacher_feedback_sample.csv`
+  - `reports/metrics/baseline_metrics.json`
+- Lightweight tests added in `tests/test_core_pipeline.py` (preprocess, metrics, pipeline smoke).
 
 ## Stable Files and Modules
-- Packaging/config: `pyproject.toml`, `requirements.txt`, `.gitignore`.
-- Core baseline modules:
+- Configuration: `pyproject.toml`, `requirements.txt`, `.gitignore`.
+- Package modules:
+  - `src/teacher_feedback_sentiment_analysis/types.py`
   - `src/teacher_feedback_sentiment_analysis/data_loading.py`
   - `src/teacher_feedback_sentiment_analysis/preprocessing.py`
   - `src/teacher_feedback_sentiment_analysis/baseline.py`
   - `src/teacher_feedback_sentiment_analysis/evaluation.py`
   - `src/teacher_feedback_sentiment_analysis/pipeline.py`
-  - `src/teacher_feedback_sentiment_analysis/types.py`
-- Entrypoint and sample artifact:
+  - `src/teacher_feedback_sentiment_analysis/__init__.py`
+- Execution/test assets:
   - `scripts/run_baseline.py`
   - `data/sample/teacher_feedback_sample.csv`
   - `reports/metrics/baseline_metrics.json`
-- Lightweight tests:
   - `tests/test_core_pipeline.py`
-- Context docs: `AGENTS.md`, `docs/project_context.md`.
 
 ## Remaining Gaps
-- No CI workflow file in `.github/workflows/`.
-- Repository documentation still incomplete (`README.md`, `CONTRIBUTING.md`, folder READMEs mostly empty).
-- No inference-focused module/API contract beyond baseline pipeline helper.
+- No CI workflow implemented in `.github/workflows/`.
+- Documentation is still incomplete (`README.md`, `CONTRIBUTING.md`, and folder READMEs are placeholders).
+- `environment.yml` is still empty.
+- No explicit inference API/module beyond the baseline pipeline helper.
 
 ## Deferred Decisions
-- Dataset contract for non-sample runs (production file paths and schema guarantees beyond `text`/`label` defaults).
-- Baseline extension strategy (keep stdlib-only vs. introduce `scikit-learn` for vectorized classical models).
-- Metrics artifact policy (commit generated metrics vs. generate on demand in CI/local runs).
-- Tooling scope for CI (lint/test matrix and Python versions).
+- Dataset contract for non-sample runs (canonical input path and strict schema rules).
+- Baseline evolution strategy (stdlib baseline only vs. introducing `scikit-learn` classical models).
+- Metrics artifact policy (tracked file vs. generated output only).
+- CI scope (Python versions, lint checks, and gating policy).
 
 ## Exact Next Recommended Step
-- Add a minimal CI workflow in `.github/workflows/` that runs the fast test command (`PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v`) on push and pull request.
+- Add one minimal GitHub Actions workflow at `.github/workflows/ci.yml` to run `PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v` on push and pull request.
