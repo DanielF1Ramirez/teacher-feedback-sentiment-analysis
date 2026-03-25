@@ -3,23 +3,43 @@
 ## Date
 2026-03-24
 
-## Completed in this step
-- Defined minimal packaging/build metadata in `pyproject.toml`.
-- Established a single-source dependency approach via `requirements.txt` -> `-e .`.
-- Added practical Python `.gitignore` entries to keep the repository clean.
-- Implemented a minimal modular baseline flow in `src/`:
-  - CSV loading and schema validation
-  - text normalization preprocessing
-  - majority-class baseline model
-  - lightweight evaluation metrics
-  - reusable end-to-end pipeline function
+## Completed Work
+- Baseline project configuration established:
+  - `pyproject.toml` with package metadata and setuptools config (`src/` layout).
+  - `requirements.txt` aligned to editable install (`-e .`) as dependency entrypoint.
+  - `.gitignore` populated with Python/build/cache/environment ignores.
+- Minimal modular NLP baseline implemented under `src/teacher_feedback_sentiment_analysis/`:
+  - `types.py`: `FeedbackRecord` dataclass.
+  - `data_loading.py`: CSV load + required-column/value validation.
+  - `preprocessing.py`: deterministic text normalization and record preprocessing.
+  - `baseline.py`: majority-class baseline classifier.
+  - `evaluation.py`: accuracy + macro precision/recall/F1.
+  - `pipeline.py`: reusable end-to-end baseline run from CSV.
+  - `__init__.py`: public API exports.
 
-## Not done yet
-- No entrypoint scripts under `scripts/`.
-- No tests in `tests/`.
-- No CI workflow files in `.github/workflows/`.
-- Main documentation (`README.md`) remains to be authored.
-- No dedicated inference module yet.
+## Stable Files and Modules
+- Packaging/config: `pyproject.toml`, `requirements.txt`, `.gitignore`.
+- Core baseline modules:
+  - `src/teacher_feedback_sentiment_analysis/data_loading.py`
+  - `src/teacher_feedback_sentiment_analysis/preprocessing.py`
+  - `src/teacher_feedback_sentiment_analysis/baseline.py`
+  - `src/teacher_feedback_sentiment_analysis/evaluation.py`
+  - `src/teacher_feedback_sentiment_analysis/pipeline.py`
+  - `src/teacher_feedback_sentiment_analysis/types.py`
+- Context docs: `AGENTS.md`, `docs/project_context.md`.
 
-## Next suggested step
-- Add one small runnable script in `scripts/` to execute the baseline pipeline against a sample CSV and save metrics.
+## Remaining Gaps
+- No CLI/entrypoint script yet in `scripts/` to run pipeline on repo data paths.
+- No lightweight test suite in `tests/`.
+- No CI workflow file in `.github/workflows/`.
+- Repository documentation still incomplete (`README.md`, `CONTRIBUTING.md`, folder READMEs mostly empty).
+- No inference-focused module/API contract beyond baseline pipeline helper.
+
+## Deferred Decisions
+- Final dataset contract for scripts/tests (exact sample CSV path and column names if different from defaults).
+- Baseline extension strategy (keep stdlib-only vs. introduce `scikit-learn` for vectorized classical models).
+- Output contract for metrics artifacts (console only vs. `reports/metrics/*.json` standard format).
+- Tooling scope for CI (lint/test matrix and Python versions).
+
+## Exact Next Recommended Step
+- Create one script `scripts/run_baseline.py` that calls `run_majority_baseline_from_csv` on a small CSV in `data/sample/`, prints metrics, and saves them to `reports/metrics/baseline_metrics.json`.
