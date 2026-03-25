@@ -1,0 +1,2 @@
+# Keep pyproject.toml as the single source of truth for dependencies.
+-e .
