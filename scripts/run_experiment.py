@@ -1,4 +1,4 @@
-"""Run the baseline sentiment pipeline on a CSV dataset."""
+"""Train and evaluate classical NLP models on a CSV dataset."""
 
 from __future__ import annotations
 
@@ -17,13 +17,15 @@ SRC_PATH = PROJECT_ROOT / "src"
 if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))
 
-from teacher_feedback_sentiment_analysis.pipeline import run_majority_baseline_from_csv  # noqa: E402
+from teacher_feedback_sentiment_analysis.pipeline import (  # noqa: E402
+    run_model_selection_experiment_from_csv,
+)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Parse script arguments."""
     parser = argparse.ArgumentParser(
-        description="Run the majority-class baseline pipeline on a CSV file."
+        description="Train, compare, and tune lightweight classical NLP models."
     )
     parser.add_argument(
         "--input-csv",
@@ -34,8 +36,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--output-json",
         type=Path,
-        default=PROJECT_ROOT / "reports" / "metrics" / "baseline_metrics.json",
-        help="Output JSON path for evaluation metrics.",
+        default=PROJECT_ROOT / "reports" / "metrics" / "model_selection_metrics.json",
+        help="Output JSON path for experiment metrics.",
     )
     parser.add_argument(
         "--text-column",
@@ -47,16 +49,36 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default="label",
         help="Name of label column in input CSV.",
     )
+    parser.add_argument(
+        "--test-size",
+        type=float,
+        default=0.4,
+        help="Fraction of data assigned to the test split.",
+    )
+    parser.add_argument(
+        "--random-state",
+        type=int,
+        default=42,
+        help="Random seed used by the split and tunable models.",
+    )
+    parser.add_argument(
+        "--selection-metric",
+        default="macro_f1",
+        help="Metric used to rank the best model.",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Execute baseline pipeline and persist metrics."""
+    """Execute the model selection workflow and persist metrics."""
     args = parse_args(argv)
-    metrics = run_majority_baseline_from_csv(
+    metrics = run_model_selection_experiment_from_csv(
         csv_path=args.input_csv,
         text_column=args.text_column,
         label_column=args.label_column,
+        test_size=args.test_size,
+        random_state=args.random_state,
+        selection_metric=args.selection_metric,
     )
 
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
@@ -66,7 +88,7 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     print(json.dumps(metrics, indent=2, sort_keys=True))
-    print(f"Saved metrics to: {args.output_json}")
+    print(f"Saved experiment metrics to: {args.output_json}")
     return 0
 
 

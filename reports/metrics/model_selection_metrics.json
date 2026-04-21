@@ -1,0 +1,263 @@
+{
+  "configuration": {
+    "label_column": "label",
+    "random_state": 42,
+    "selection_metric": "macro_f1",
+    "test_size": 0.4,
+    "text_column": "text"
+  },
+  "dataset": {
+    "label_distribution": {
+      "negative": 3,
+      "positive": 4
+    },
+    "source_csv": "C:\\Users\\USER\\Downloads\\teacher-feedback-sentiment-analysis\\data\\sample\\teacher_feedback_sample.csv",
+    "total_samples": 7
+  },
+  "models": [
+    {
+      "best_params": {
+        "classifier__C": 0.5,
+        "tfidf__ngram_range": [
+          1,
+          1
+        ],
+        "tfidf__sublinear_tf": false
+      },
+      "metadata": {
+        "base_model_name": "linear_svc",
+        "cv_folds": 2
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "confusion_matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "macro_f1": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "support": 3
+      },
+      "model_family": "classical_ml",
+      "model_name": "linear_svc_tuned",
+      "tuned": true
+    },
+    {
+      "best_params": {},
+      "metadata": {},
+      "metrics": {
+        "accuracy": 0.6666666666666666,
+        "confusion_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "macro_f1": 0.4,
+        "macro_precision": 0.3333333333333333,
+        "macro_recall": 0.5,
+        "support": 3
+      },
+      "model_family": "classical_ml",
+      "model_name": "linear_svc",
+      "tuned": false
+    },
+    {
+      "best_params": {},
+      "metadata": {},
+      "metrics": {
+        "accuracy": 0.6666666666666666,
+        "confusion_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "macro_f1": 0.4,
+        "macro_precision": 0.3333333333333333,
+        "macro_recall": 0.5,
+        "support": 3
+      },
+      "model_family": "classical_ml",
+      "model_name": "logistic_regression",
+      "tuned": false
+    },
+    {
+      "best_params": {
+        "classifier__C": 0.5,
+        "tfidf__ngram_range": [
+          1,
+          1
+        ],
+        "tfidf__sublinear_tf": false
+      },
+      "metadata": {
+        "base_model_name": "logistic_regression",
+        "cv_folds": 2
+      },
+      "metrics": {
+        "accuracy": 0.6666666666666666,
+        "confusion_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "macro_f1": 0.4,
+        "macro_precision": 0.3333333333333333,
+        "macro_recall": 0.5,
+        "support": 3
+      },
+      "model_family": "classical_ml",
+      "model_name": "logistic_regression_tuned",
+      "tuned": true
+    },
+    {
+      "best_params": {},
+      "metadata": {},
+      "metrics": {
+        "accuracy": 0.6666666666666666,
+        "confusion_matrix": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "macro_f1": 0.4,
+        "macro_precision": 0.3333333333333333,
+        "macro_recall": 0.5,
+        "support": 3
+      },
+      "model_family": "classical_ml",
+      "model_name": "multinomial_nb",
+      "tuned": false
+    },
+    {
+      "best_params": {},
+      "metadata": {
+        "majority_label": "negative"
+      },
+      "metrics": {
+        "accuracy": 0.3333333333333333,
+        "confusion_matrix": [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "macro_f1": 0.25,
+        "macro_precision": 0.16666666666666666,
+        "macro_recall": 0.5,
+        "support": 3
+      },
+      "model_family": "baseline",
+      "model_name": "majority_class_baseline",
+      "tuned": false
+    }
+  ],
+  "notes": [
+    "This repository uses a very small sample dataset. Reported metrics are useful for reproducibility and comparison, not as a claim of broad generalization.",
+    "Hyperparameter search is intentionally small because the tracked sample dataset is tiny."
+  ],
+  "selected_model": {
+    "best_params": {
+      "classifier__C": 0.5,
+      "tfidf__ngram_range": [
+        1,
+        1
+      ],
+      "tfidf__sublinear_tf": false
+    },
+    "metadata": {
+      "base_model_name": "linear_svc",
+      "cv_folds": 2
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "labels": [
+        "negative",
+        "positive"
+      ],
+      "macro_f1": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "support": 3
+    },
+    "model_family": "classical_ml",
+    "model_name": "linear_svc_tuned",
+    "tuned": true
+  },
+  "split_summary": {
+    "test_distribution": {
+      "negative": 1,
+      "positive": 2
+    },
+    "test_size": 3,
+    "train_distribution": {
+      "negative": 2,
+      "positive": 2
+    },
+    "train_size": 4
+  }
+}
