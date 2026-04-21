@@ -8,15 +8,16 @@ Reference source folder:
 - `~/OneDrive/Documentos/ProyectosGitHub/PLN`
 
 ## Project summary
-This repository professionalizes an NLP project focused on sentiment analysis and related classification tasks using teacher evaluation comments.
+
+This repository professionalizes an NLP project focused on sentiment analysis over teacher evaluation comments.
 
 ## Expected repository purpose
-The repository should consolidate the original academic material into a clean software-oriented NLP project with:
-- structured preprocessing
-- feature engineering
-- classical ML baselines
-- reproducible evaluation
-- clear documentation
+The repository consolidates academic source material into a clean software-oriented NLP project with:
+- structured preprocessing,
+- reproducible train/test evaluation,
+- classical ML model comparison,
+- lightweight hyperparameter tuning,
+- clear documentation and publication hygiene.
 
 ## Likely source phases
 The original source folder contains sequential project phases such as:
@@ -36,17 +37,18 @@ The original source folder contains sequential project phases such as:
 - `tests/`
 
 ## Migration priorities
-1. Identify the final notebook or main deliverable.
-2. Separate exploratory notebooks from reusable code.
-3. Extract preprocessing logic into scripts/modules.
-4. Preserve final metrics and representative plots.
-5. Write a professional README and context docs.
+1. Separate exploratory notebooks from reusable code.
+2. Preserve a lightweight dataset contract for local validation.
+3. Keep the final workflow reproducible from scripts rather than notebooks.
+4. Track representative metrics and experiment outputs.
+5. Publish the repository with professional documentation and clear scope limits.
 
 ## Working constraints
 - The original source material is reference-only unless migration is requested.
 - Keep the repository lightweight.
 - Do not commit large raw datasets.
 - Prefer fast local validations.
+- Keep the final scope inside classical ML.
 
 ## Completion target
-A portfolio-ready NLP repository that clearly explains the problem, data flow, modeling choices, and evaluation results.
+A portfolio-ready NLP repository that clearly explains the problem, data flow, model-selection strategy, evaluation limits, and final reproducible workflow.
