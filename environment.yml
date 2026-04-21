@@ -5,4 +5,5 @@ dependencies:
   - python>=3.10,<3.13
   - pip
   - pip:
+      - scikit-learn>=1.5,<1.7
       - -e .

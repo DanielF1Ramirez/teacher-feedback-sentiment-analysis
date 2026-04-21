@@ -7,7 +7,7 @@ from collections.abc import Sequence
 
 def evaluate_predictions(
     true_labels: Sequence[str], predicted_labels: Sequence[str]
-) -> dict[str, float | int]:
+) -> dict[str, float | int | list[str] | list[list[int]]]:
     """Compute lightweight evaluation metrics."""
     if len(true_labels) != len(predicted_labels):
         raise ValueError(
@@ -28,6 +28,8 @@ def evaluate_predictions(
         "macro_recall": macro_recall,
         "macro_f1": macro_f1,
         "support": len(true_labels),
+        "labels": labels,
+        "confusion_matrix": _confusion_matrix(true_labels, predicted_labels, labels),
     }
 
 
@@ -78,3 +80,15 @@ def _macro_scores(
         sum(recalls) / count,
         sum(f1_scores) / count,
     )
+
+
+def _confusion_matrix(
+    true_labels: Sequence[str], predicted_labels: Sequence[str], labels: Sequence[str]
+) -> list[list[int]]:
+    index_by_label = {label: index for index, label in enumerate(labels)}
+    matrix = [[0 for _ in labels] for _ in labels]
+
+    for true, pred in zip(true_labels, predicted_labels):
+        matrix[index_by_label[true]][index_by_label[pred]] += 1
+
+    return matrix

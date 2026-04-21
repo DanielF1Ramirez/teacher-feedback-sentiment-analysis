@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+from collections import Counter
 from pathlib import Path
 from typing import Iterable
 
@@ -51,3 +52,22 @@ def _validate_columns(
     missing = [column for column in (text_column, label_column) if column not in columns]
     if missing:
         raise ValueError(f"CSV file is missing required columns: {missing}")
+
+
+def records_to_dataset(records: Iterable[FeedbackRecord]) -> tuple[list[str], list[str]]:
+    """Convert record objects into text and label sequences."""
+    texts: list[str] = []
+    labels: list[str] = []
+    for record in records:
+        texts.append(record.text)
+        labels.append(record.label)
+
+    if not texts:
+        raise ValueError("Cannot create a dataset from empty records.")
+
+    return texts, labels
+
+
+def summarize_label_distribution(labels: Iterable[str]) -> dict[str, int]:
+    """Build a deterministic label distribution summary."""
+    return dict(sorted(Counter(labels).items()))
